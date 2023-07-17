@@ -14,13 +14,13 @@ export default function App() {
   const [photos, setPhotos] = useState([])
 
   // init gallery
-  client
+  /* client
   .photos
-  .search({ apiQuery, per_page: 10 })
+  .search({ query: apiQuery, per_page: 10 })
   .then(photos => {
     console.log(photos)
     setPhotos(photos)
-  });
+  }); */
 
 
   const onQueryChange = (e) => {
@@ -33,7 +33,9 @@ export default function App() {
          // publish a API request
          apiQuery = inputQuery;
 
-         client.photos.search({ apiQuery, per_page: 10 }).then(photos => {console.log(photos)});
+         client.photos.search({ query: apiQuery, per_page: 10 }).then(photos => {
+           console.log("log", photos.photos)
+           setPhotos(photos.photos)});
       } else {
          return false;
       }
@@ -50,8 +52,7 @@ export default function App() {
       <main className="gallery">
         {
           photos.map((photo) => (
-            <div>{photo}
-            </div>
+            <img src={photo.src.medium} alt={photo.alt} width="200px" heigth="200px" />
           ))
         }
       </main>
