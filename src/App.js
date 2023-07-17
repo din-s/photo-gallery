@@ -7,8 +7,8 @@ export default function App() {
 
   const [inputQuery, setInputQuery]= useState("")
 
-  // for berevirty I will not commit API Key
-  const myAPIKey = "U3D0ztTdnkaW03FBTPn1xMA9yQL9p4w6GNeWb9LP2EMDWdKMTb4TqmOU"; 
+  // for berevity I will not commit personal API Key
+  const myAPIKey = "YOUR_API_KEY"
   const client = createClient(myAPIKey);
   let apiQuery = "Beautiful, Cars, Books";
   const [photos, setPhotos] = useState([])
