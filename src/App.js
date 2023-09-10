@@ -50,7 +50,7 @@ export default function App() {
       <p className="trending-container"> 
       <span className="trending-static">Trending: <span className="trending-topics">Beautiful, Cars, books</span></span>
       </p>
-      <p class="info"><span>&#9888;</span> <span>Info: For gallery to update below please Input your search query and hit Enter to see the updates. This has been designed to reduce the load resource provider</span></p>
+      <p class="info"><div class="icon">&#9888;</div> <div><strong>Info</strong>: For gallery to update below please Input your search query and hit Enter to see the updates. This has been designed to reduce the load resource provider</div></p>
       </header>
       <main className="gallery">
         {
