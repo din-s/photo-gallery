@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./style.css";
 import { createClient } from 'pexels';
 
@@ -8,19 +8,23 @@ export default function App() {
   const [inputQuery, setInputQuery]= useState("")
 
   // for berevity I will not commit personal API Key
-  const myAPIKey = "YOUR_API_KEY"
+  const myAPIKey = "U3D0ztTdnkaW03FBTPn1xMA9yQL9p4w6GNeWb9LP2EMDWdKMTb4TqmOU"
   const client = createClient(myAPIKey);
   let apiQuery = "Beautiful, Cars, Books";
   const [photos, setPhotos] = useState([])
 
   // init gallery
-  /* client
-  .photos
-  .search({ query: apiQuery, per_page: 10 })
-  .then(photos => {
-    console.log(photos)
-    setPhotos(photos)
-  }); */
+  useEffect(() => {
+    client
+    .photos
+    .search({ query: apiQuery, per_page: 10 })
+    .then(photos => {
+      setPhotos(photos.photos)
+      }
+    );
+
+  }, [inputQuery])
+  
 
 
   const onQueryChange = (e) => {
@@ -28,13 +32,11 @@ export default function App() {
   }
 
   const onKeyPress = (e) => {
-      console.log(e);
       if (e.keyCode == 13 || e.code == "Enter" || e.key =="Enter") {
          // publish a API request
          apiQuery = inputQuery;
 
          client.photos.search({ query: apiQuery, per_page: 10 }).then(photos => {
-           console.log("log", photos.photos)
            setPhotos(photos.photos)});
       } else {
          return false;
@@ -48,11 +50,12 @@ export default function App() {
       <p className="trending-container"> 
       <span className="trending-static">Trending: <span className="trending-topics">Beautiful, Cars, books</span></span>
       </p>
+      <p class="info"><span>&#9888;</span> <span>Info: For gallery to update below please Input your search query and hit Enter to see the updates. This has been designed to reduce the load resource provider</span></p>
       </header>
       <main className="gallery">
         {
-          photos.map((photo) => (
-            <img src={photo.src.medium} alt={photo.alt} width="200px" heigth="200px" />
+          photos.length && photos.map((photo, index) => (
+            <img key={index} src={photo.src.medium} alt={photo.alt} width="200px" heigth="200px" />
           ))
         }
       </main>
